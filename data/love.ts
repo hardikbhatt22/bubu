@@ -416,11 +416,21 @@ export interface Photo {
  * not name a place or an occasion that the picture does not show.
  */
 export const photos: Photo[] = [
+  /* Array order is the order they rise in the final frame. The LAST entry is
+     the one that lands last, largest and closest, and is the only one that
+     keeps its note there — so the hero of the finale is chosen here, by
+     position, not buried in the scene. */
+  {
+    id: 5,
+    alt: 'You, standing in the garden, smiling straight at the camera.',
+    scene: 'bubu',
+    note: 'you',
+    focal: '50% 80%',
+  },
   {
     id: 1,
     alt: 'The two of us standing together, my arm around you, you looking up at me.',
-    scene: 'bubu',
-    note: 'you',
+    scene: 'lit',
     focal: '50% 45%',
   },
   {
@@ -434,7 +444,6 @@ export const photos: Photo[] = [
     id: 3,
     alt: 'The two of us standing together outside, on another day.',
     scene: 'lit',
-    note: 'another one',
     focal: '50% 55%',
   },
   {

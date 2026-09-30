@@ -110,7 +110,7 @@ export default function HoldButton({
   );
 
   return (
-    <div className="flex flex-col items-center gap-6 select-none">
+    <div className="flex select-none flex-col items-center">
       <motion.button
         type="button"
         aria-label={label}
@@ -131,7 +131,10 @@ export default function HoldButton({
           if (e.key === ' ' || e.key === 'Enter') release();
         }}
         onBlur={release}
-        className="relative grid h-32 w-32 place-items-center rounded-full sm:h-40 sm:w-40 [@media(max-height:720px)]:h-28 [@media(max-height:720px)]:w-28"
+        /* Sized against the viewport's height as well as its width: the hold
+           is behind a scroll lock, so on a phone held sideways it has to shrink
+           to stay reachable rather than slide under the fold. */
+        className="relative grid size-[clamp(5rem,min(34vw,23svh),10rem)] place-items-center rounded-full"
         style={{ scale, touchAction: 'none' }}
         whileTap={{ scale: 0.99 }}
       >

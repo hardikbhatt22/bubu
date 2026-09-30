@@ -37,6 +37,13 @@ export const photoFiles: PhotoFile[] = [
     "width": 591,
     "height": 1280,
     "blurDataURL": "data:image/webp;base64,UklGRr4AAABXRUJQVlA4ILIAAACQBgCdASoUACwAPsFOnkynpCMiOrzIAPAYCWQAuzNZABxnf45J92fj0kG4cTBpx/di6zToWYtvO8EPwW5IAP7pUTL7635lC6l0NSoFDZ8ehO9cGZiVQLfrf7aMWXTu2/+maCrGZSEYYpnEklDFND0r64pBpBi/ySM5XdVocByB9uqAqZZPuMFsYlujhXwe30KyntJjqnd7VrIdCR6OzuPHiKm6HXHhIs67SsgtHSlZkAAA"
+  },
+  {
+    "slot": 5,
+    "src": "/images/photo-5.jpeg",
+    "width": 591,
+    "height": 1280,
+    "blurDataURL": "data:image/webp;base64,UklGRqgAAABXRUJQVlA4IJwAAABwBQCdASoUACwAPt1ipU2opaMiMBqoARAbiWUArwwIkfX9jF5ZBOdI6abgied7er0IgrZQAP6/FxGkMZ6FHYw+lH8197VWmj0TOCq+ZpOVsZxGeqdA0UEUmB2lgWd+fLksqkN1fAiioBDRMgaX3OrBoFKHHSUdVYYN76QSmpcng4ngzVHvBGeLYrbcTZro2dl/TkeIyairRnTgAAA="
   }
 ];
 

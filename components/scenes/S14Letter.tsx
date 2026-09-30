@@ -24,7 +24,7 @@ export default function S14Letter() {
   const { reduced } = useJourney();
 
   return (
-    <Scene id="letter" label="The letter" className="flex items-center px-5 py-[14vh] sm:px-6">
+    <Scene id="letter" label="The letter" className="flex items-center px-5 py-[14svh] sm:px-6">
       <motion.article
         className="relative mx-auto w-full max-w-2xl"
         initial={reduced ? { opacity: 0 } : { opacity: 0, y: 28 }}

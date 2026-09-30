@@ -28,10 +28,18 @@ export default function S01Door() {
   };
 
   return (
-    <Scene id="door" label="The door" className="flex items-center justify-center px-6">
-      <div className="relative flex w-full max-w-md flex-col items-center gap-10 text-center sm:gap-14 [@media(max-height:720px)]:gap-6">
-        {/* the one lamp already burning, far off */}
+    <Scene id="door" label="The door" className="flex items-center justify-center px-6 py-6">
+      {/* The page is held still until the door opens, so nothing here may fall
+          below the fold — on a phone held sideways there is no way to scroll
+          down to a hold button she cannot reach. Every gap and every size is
+          therefore measured against the viewport's HEIGHT, and the whole plaque
+          shrinks with it rather than overflowing it. */}
+      <div className="relative flex w-full max-w-md flex-col items-center gap-[clamp(1rem,5svh,3.5rem)] text-center">
+        {/* the one lamp already burning, far off.
+            It is the first thing to go when there is no room: the plaque is
+            what has to survive, not the scenery around it. */}
         <motion.div
+          className="[@media(max-height:460px)]:hidden"
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 2.2, ease: ease.enter, delay: 0.3 }}
@@ -40,7 +48,7 @@ export default function S01Door() {
         </motion.div>
 
         {/* the plaque */}
-        <div className="flex flex-col items-center gap-4 sm:gap-5">
+        <div className="flex flex-col items-center gap-[clamp(0.5rem,2svh,1.25rem)]">
           <motion.p
             className="u-caps text-cream-200/40"
             initial={{ opacity: 0 }}
@@ -51,7 +59,9 @@ export default function S01Door() {
           </motion.p>
 
           <motion.h1
-            className="u-display-tight text-4xl text-cream-100 sm:text-5xl"
+            /* Fluid on both axes. The width term is the design; the height term
+               is what keeps a 70px name out of a 360px-tall screen. */
+            className="u-display-tight text-cream-100 text-[clamp(2.5rem,min(11vw,13svh),7rem)] leading-[0.98]"
             initial={reduced ? { opacity: 0 } : { opacity: 0, y: 20, filter: 'blur(12px)' }}
             animate={reduced ? { opacity: 1 } : { opacity: 1, y: 0, filter: 'blur(0px)' }}
             transition={{ duration: 2.1, ease: ease.enter, delay: 1.1 }}
@@ -60,7 +70,7 @@ export default function S01Door() {
           </motion.h1>
 
           <motion.p
-            className="u-hand text-xl text-amber-300/75"
+            className="u-hand text-amber-300/75 text-[clamp(1.05rem,min(5vw,4.2svh),1.6rem)]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1.5, ease: ease.enter, delay: 2.1 }}
@@ -77,13 +87,13 @@ export default function S01Door() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0, transition: { duration: 0.35 } }}
               transition={{ duration: 1.4, ease: ease.enter, delay: 2.9 }}
-              className="flex flex-col items-center gap-6 sm:gap-8"
+              className="flex flex-col items-center gap-[clamp(0.75rem,3svh,2rem)]"
             >
               <HoldButton onComplete={open} />
               <button
                 type="button"
                 onClick={open}
-                className="u-caps rounded-edge px-3 py-2 text-[0.58rem] text-cream-200/25 transition-colors hover:text-cream-200/60"
+                className="u-caps u-quiet rounded-edge px-3 text-[0.58rem] text-cream-200/25 transition-colors hover:text-cream-200/60"
               >
                 {ui.skip}
               </button>

@@ -65,7 +65,7 @@ export default function Atmosphere() {
 
       {/* -------------------------------------------------------- the stars */}
       <motion.svg
-        className="absolute inset-x-0 top-0 h-[72vh] w-full"
+        className="absolute inset-x-0 top-0 h-[72%] w-full"
         viewBox="0 0 100 62"
         preserveAspectRatio="none"
         style={{ opacity: starOpacity }}
@@ -91,7 +91,7 @@ export default function Atmosphere() {
       {/* --------------------------------------------- horizon / daybreak
            Off-frame until the promises are lit, then it becomes the sunrise. */}
       <motion.div
-        className="absolute inset-x-0 bottom-0 h-[58vh]"
+        className="absolute inset-x-0 bottom-0 h-[58%]"
         style={{
           opacity: horizonOpacity,
           background:

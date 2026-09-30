@@ -49,7 +49,7 @@ export default function S11TwoMinutes() {
   }, [seen, reduced, secs]);
 
   return (
-    <Scene id="twominutes" label="Two minutes" className="flex items-center px-6 py-[14vh]">
+    <Scene id="twominutes" label="Two minutes" className="flex items-center px-6 py-[14svh]">
       <div className="mx-auto flex w-full max-w-5xl flex-col items-center gap-16">
         <Beats
           lines={s.beats}

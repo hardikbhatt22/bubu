@@ -22,7 +22,7 @@ export default function S06Majari() {
   const seen = useInView(ref, { once: true, amount: 0.45 });
 
   return (
-    <Scene id="majari" label="Tech Majari" className="flex items-center px-6 py-[12vh]">
+    <Scene id="majari" label="Tech Majari" className="flex items-center px-6 py-[12svh]">
       <div className="mx-auto grid w-full max-w-5xl items-center gap-16 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
         {/* the lanyard */}
         <Reveal soft>
@@ -108,9 +108,11 @@ export default function S06Majari() {
               </defs>
             </svg>
 
-            <div className="mt-2 flex max-w-md justify-between">
+            <div className="mt-2 flex max-w-md items-start justify-between gap-4">
               <span className="u-caps text-slate-500/70">{majariCopy.leave}</span>
-              <span className="u-caps text-right text-amber-300/85">{majariCopy.stay}</span>
+              <span className="u-caps max-w-[55%] text-right text-amber-300/85">
+                {majariCopy.stay}
+              </span>
             </div>
           </div>
 

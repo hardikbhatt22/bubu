@@ -24,7 +24,7 @@ export default function S02Square() {
   const posts = chapters.filter((c) => c.lamp);
 
   return (
-    <Scene id="square" label="The square" autoLight={false} className="flex items-end justify-center px-6 pb-[14vh]">
+    <Scene id="square" label="The square" autoLight={false} className="flex items-end justify-center px-6 pb-[14svh]">
       <div className="flex w-full max-w-5xl flex-col items-center gap-16">
         <Beats
           lines={s.beats}

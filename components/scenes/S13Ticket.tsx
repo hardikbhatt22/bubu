@@ -45,7 +45,7 @@ export default function S13Ticket() {
   const remaining = 3 - picks.length;
 
   return (
-    <Scene id="ticket" label="Pick our next three" className="flex items-center px-6 py-[14vh]">
+    <Scene id="ticket" label="Pick our next three" className="flex items-center px-6 py-[14svh]">
       <div className="mx-auto grid w-full max-w-5xl items-center gap-14 lg:grid-cols-[1fr_0.9fr] lg:gap-20">
         <div className="flex flex-col gap-10">
           <Eyebrow>{s.place}</Eyebrow>
@@ -150,7 +150,7 @@ export default function S13Ticket() {
             <button
               type="button"
               onClick={() => setPicks([])}
-              className="u-caps self-start rounded-edge px-2 py-2 text-[0.58rem] text-cream-200/30 transition-colors hover:text-amber-300/80"
+              className="u-caps u-quiet self-start rounded-edge px-2 text-[0.58rem] text-cream-200/30 transition-colors hover:text-amber-300/80"
             >
               {ticketCopy.reset}
             </button>

@@ -40,15 +40,18 @@ export default function S07Junagadh() {
     offset: ['start start', 'end end'],
   });
 
-  /* movement windows */
-  const m1 = useTransform(p, [0, 0.05, 0.2, 0.28], [0, 1, 1, 0]);
-  const hard = useTransform(p, [0.14, 0.2, 0.27, 0.33], [0, 1, 1, 0]);
-  const m2 = useTransform(p, [0.3, 0.38, 0.55, 0.62], [0, 1, 1, 0]);
+  /* Movement windows. Movement one and the hard line occupy the same centred
+     space, so their windows butt up against each other instead of overlapping —
+     they used to both sit at full opacity between 0.14 and 0.2, which printed
+     "you told me not to come" straight through the title. */
+  const m1 = useTransform(p, [0, 0.05, 0.14, 0.19], [0, 1, 1, 0]);
+  const hard = useTransform(p, [0.21, 0.26, 0.29, 0.33], [0, 1, 1, 0]);
+  const m2 = useTransform(p, [0.34, 0.4, 0.55, 0.62], [0, 1, 1, 0]);
   const m3 = useTransform(p, [0.62, 0.7, 1, 1], [0, 1, 1, 1]);
 
   /* the doorway opens as she scrolls into the journey */
-  const doorW = useTransform(p, [0.3, 0.44], ['64%', '100%']);
-  const speed = useTransform(p, [0.3, 0.46, 0.58], [0.25, 1, 0.6]);
+  const doorW = useTransform(p, [0.34, 0.46], ['64%', '100%']);
+  const speed = useTransform(p, [0.34, 0.48, 0.58], [0.25, 1, 0.6]);
   const hillsY = useTransform(p, [0.62, 1], ['16%', '0%']);
 
   return (
@@ -58,7 +61,10 @@ export default function S07Junagadh() {
       height={reduced ? 1.6 : 3.6}
       className="relative"
     >
-      <div ref={outer} className="relative h-full w-full">
+      {/* The pin takes the scene's declared travel from `--scene-h`; the scene
+          itself is free to grow past it so the couplet below gets its own room
+          instead of spilling onto the next chapter. */}
+      <div ref={outer} className="relative w-full" style={{ height: 'var(--scene-h)' }}>
         <div className="sticky top-0 flex h-[100svh] items-center justify-center overflow-hidden px-6">
           {/* ------------------------------------------------- movement one */}
           <motion.div
@@ -99,7 +105,7 @@ export default function S07Junagadh() {
           >
             {/* the doorway */}
             <motion.div
-              className="relative h-[74vh] overflow-hidden rounded-edge"
+              className="relative h-[74svh] max-h-[560px] overflow-hidden rounded-edge sm:max-h-none"
               style={{ width: doorW, maxWidth: 760 }}
             >
               {/* what is outside the door */}
@@ -176,7 +182,7 @@ export default function S07Junagadh() {
                 >
                   {junagadh.movement2.line}
                 </motion.p>
-                <p className="u-caps max-w-xs text-cream-200/45 sm:max-w-none">
+                <p className="u-caps max-w-[26ch] px-4 text-cream-200/45 sm:max-w-none">
                   {junagadh.movement2.sub}
                 </p>
               </div>
@@ -191,7 +197,7 @@ export default function S07Junagadh() {
             {/* the hills */}
             <motion.svg
               aria-hidden
-              className="absolute inset-x-0 bottom-0 h-[42vh] w-full"
+              className="absolute inset-x-0 bottom-0 h-[42svh] w-full"
               viewBox="0 0 400 140"
               preserveAspectRatio="none"
               style={{ y: hillsY }}
@@ -229,7 +235,7 @@ export default function S07Junagadh() {
       </div>
 
       {/* the couplet sits after the pin releases, so it is read, not skimmed */}
-      <div className="relative flex justify-center px-6 pb-[14vh]">
+      <div className="relative flex justify-center px-6 pb-[14svh] pt-[6svh]">
         <Couplet scene="junagadh" />
       </div>
     </Scene>

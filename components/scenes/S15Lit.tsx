@@ -36,18 +36,28 @@ import { ease } from '@/lib/motion';
  */
 /* Slot heights are capped in svh (the SMALL viewport height) so a frame can
    never be pushed below the fold on a browser whose chrome expands. */
+/*
+ * The constellation — one slot per photograph, in the order they appear in
+ * `photos`. The last slot is the hero: largest, closest, and it lands last.
+ *
+ * Widths are capped in svh (the SMALL viewport height) as well as in percent,
+ * because a frame's HEIGHT is what overflows — a 2:3 mat is one and a half
+ * times its own width, so a purely width-based slot spills off a short screen.
+ */
 const DESKTOP = [
-  { left: '6%', top: '14%', w: 'min(17%, 21svh)', r: 'tall' as const, light: 'right' as const },
-  { left: '27%', top: '44%', w: 'min(16%, 24svh)', r: 'portrait' as const, light: 'top' as const },
-  { left: '63%', top: '12%', w: 'min(17%, 24svh)', r: 'portrait' as const, light: 'left' as const },
-  { left: '44%', top: '48%', w: 'min(22%, 26svh)', r: 'tall' as const, light: 'top' as const },
+  { left: '4%', top: '13%', w: 'min(15%, 19svh)', r: 'tall' as const, light: 'right' as const },
+  { left: '22%', top: '46%', w: 'min(14%, 21svh)', r: 'portrait' as const, light: 'top' as const },
+  { left: '40%', top: '10%', w: 'min(15%, 21svh)', r: 'portrait' as const, light: 'left' as const },
+  { left: '78%', top: '40%', w: 'min(15%, 20svh)', r: 'tall' as const, light: 'left' as const },
+  { left: '56%', top: '50%', w: 'min(20%, 24svh)', r: 'tall' as const, light: 'top' as const },
 ];
 
 const MOBILE = [
-  { left: '5%', top: '8%', w: 'min(31%, 20svh)', r: 'tall' as const, light: 'right' as const },
-  { left: '62%', top: '16%', w: 'min(30%, 22svh)', r: 'portrait' as const, light: 'left' as const },
-  { left: '9%', top: '46%', w: 'min(29%, 21svh)', r: 'portrait' as const, light: 'top' as const },
-  { left: '48%', top: '52%', w: 'min(40%, 24svh)', r: 'tall' as const, light: 'top' as const },
+  { left: '3%', top: '5%', w: 'min(30%, 17svh)', r: 'tall' as const, light: 'right' as const },
+  { left: '60%', top: '10%', w: 'min(30%, 18svh)', r: 'portrait' as const, light: 'left' as const },
+  { left: '6%', top: '36%', w: 'min(28%, 17svh)', r: 'portrait' as const, light: 'top' as const },
+  { left: '66%', top: '40%', w: 'min(28%, 17svh)', r: 'tall' as const, light: 'left' as const },
+  { left: '28%', top: '60%', w: 'min(36%, 19svh)', r: 'tall' as const, light: 'top' as const },
 ];
 
 export default function S15Lit() {
@@ -97,7 +107,9 @@ export default function S15Lit() {
 
   return (
     <Scene id="lit" label="Sunrise" height={reduced ? 2 : 4.6} className="relative">
-      <div ref={outer} className="relative h-full w-full">
+      {/* Same as the train: the pin's travel comes from the scene's declared
+          height, leaving the section free to grow around it. */}
+      <div ref={outer} className="relative w-full" style={{ height: 'var(--scene-h)' }}>
         <div className="sticky top-0 flex h-[100svh] items-center justify-center overflow-hidden px-5 sm:px-6">
           {/* the sunrise, breaking on the last line */}
           <motion.div
@@ -189,7 +201,7 @@ export default function S15Lit() {
           {/* what she planned, kept in the corner */}
           {picks.length === 3 ? (
             <motion.div
-              className="absolute bottom-5 right-4 hidden sm:block"
+              className="absolute bottom-[max(1.25rem,env(safe-area-inset-bottom))] right-[max(1rem,env(safe-area-inset-right))] hidden sm:block"
               style={{ opacity: beatTwo }}
             >
               <span className="u-caps mb-2 block text-right text-[0.5rem] text-ink-900/45">
@@ -203,7 +215,7 @@ export default function S15Lit() {
           <motion.button
             type="button"
             onClick={() => goTo('door')}
-            className="u-hand absolute bottom-6 left-1/2 -translate-x-1/2 rounded-edge px-4 py-2 text-base text-ink-900/45 transition-colors hover:text-ink-900/80"
+            className="u-hand u-quiet absolute bottom-[max(1.5rem,env(safe-area-inset-bottom))] left-1/2 -translate-x-1/2 rounded-edge px-4 text-base text-ink-900/45 transition-colors hover:text-ink-900/80"
             style={{ opacity: beatTwo }}
           >
             {finalMessage.again}

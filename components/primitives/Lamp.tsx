@@ -35,14 +35,19 @@ export default function Lamp({
       className={`relative inline-block ${className}`}
       style={{ width: size, height: h }}
     >
-      {/* the bloom — the light itself, not a shadow */}
+      {/* the bloom — the light itself, not a shadow.
+          Centred with a negative margin rather than `-translate-x-1/2`: this
+          span animates `scale`, and the inline transform Framer writes for that
+          replaces the class's translate outright, which slid every bloom in the
+          site half its own width to the right of the lamp it belongs to. */}
       <motion.span
         aria-hidden
-        className="absolute left-1/2 top-0 -translate-x-1/2 rounded-full"
+        className="absolute left-1/2 top-0 rounded-full"
         style={{
           width: size * 3.4,
           height: size * 3.4,
           marginTop: -size * 1.2,
+          marginLeft: -size * 1.7,
           background:
             'radial-gradient(circle, rgba(246,201,122,0.55) 0%, rgba(233,166,60,0.22) 34%, transparent 68%)',
         }}

@@ -39,7 +39,7 @@ export default function Couplet({
     >
       <span aria-hidden className="h-px w-10 bg-amber-400/30" />
 
-      <div className="u-deva text-lg text-cream-100/90 sm:text-xl">
+      <div className="u-deva max-w-full text-balance text-[clamp(1rem,4.1vw,1.45rem)] text-cream-100/90">
         <p>{c.deva[0]}</p>
         <p>{c.deva[1]}</p>
       </div>
@@ -59,7 +59,7 @@ export default function Couplet({
       <button
         type="button"
         onClick={toggleRoman}
-        className="u-caps rounded-edge px-2 py-2 text-[0.6rem] text-cream-200/35 transition-colors hover:text-amber-300/80"
+        className="u-caps u-quiet rounded-edge px-2 text-[0.6rem] text-cream-200/35 transition-colors hover:text-amber-300/80"
         aria-pressed={roman}
       >
         {roman ? ui.devaToggle : ui.romanToggle}

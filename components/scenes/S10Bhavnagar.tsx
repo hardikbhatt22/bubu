@@ -30,10 +30,10 @@ export default function S10Bhavnagar() {
       label="The quiet days"
       autoLight={false}
       height={1.35}
-      className="flex items-center px-6 py-[18vh]"
+      className="flex items-center px-6 py-[18svh]"
     >
       {/* deliberately narrow column inside a wide frame — distance as layout */}
-      <div className="mx-auto flex w-full max-w-4xl flex-col gap-[16vh]">
+      <div className="mx-auto flex w-full max-w-4xl flex-col gap-[16svh]">
         <div className="flex flex-col gap-10">
           <Reveal soft tempo={tempo.still} className="u-caps flex items-center gap-3 text-slate-500/80">
             <span className="inline-block h-px w-8 bg-slate-500/40" />

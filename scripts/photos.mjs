@@ -14,7 +14,20 @@
 import { readdir, writeFile } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import path from 'node:path';
-import sharp from 'sharp';
+
+/*
+ * sharp is loaded dynamically and on purpose. It ships as an optional native
+ * dependency, so a build machine can legitimately be without it — and a
+ * top-level import would then throw before any error handling ran, failing
+ * `prebuild` and taking the whole deployment down over artwork. If it is
+ * missing we keep the manifest that is already committed and carry on.
+ */
+let sharp;
+try {
+  ({ default: sharp } = await import('sharp'));
+} catch {
+  sharp = null;
+}
 
 const IMAGES_DIR = path.join(process.cwd(), 'public', 'images');
 const OUT_FILE = path.join(process.cwd(), 'data', 'photos.generated.ts');
@@ -27,6 +40,11 @@ const slotOf = (name) => {
 };
 
 async function main() {
+  if (!sharp) {
+    console.warn('[photos] sharp unavailable — keeping the existing manifest.');
+    return;
+  }
+
   let files = [];
   if (existsSync(IMAGES_DIR)) {
     files = (await readdir(IMAGES_DIR))

@@ -66,15 +66,20 @@ export default function Scene({
       id={`scene-${id}`}
       aria-label={label}
       className={`relative z-10 w-full ${className}`}
-      /* A scene that asks for extra scroll length gets an explicit `height`,
-         not just `min-height`. The pinned sequences hold their sticky child
-         inside a `h-full` wrapper, and a percentage height cannot resolve
-         against a parent that only has a minimum — the wrapper collapses to
-         one viewport and the pin lets go the moment it is entered. */
+      /* `svh`, not `dvh`. On a phone, `dvh` changes every time the address bar
+         slides away, which re-lays-out fifteen scenes mid-scroll and makes the
+         scroll-driven sequences stutter. `svh` is the one viewport unit that
+         holds still while she is moving.
+         A scene that asks for extra scroll length publishes that length as
+         `--scene-h` rather than as a hard `height`. A pinned wrapper reads the
+         variable, so it gets its full travel while the section is still free to
+         grow for anything that follows the pin — a `height` here would let that
+         content spill over the top of the next scene. */
       style={
-        height
-          ? { minHeight: `${height * 100}dvh`, height: `${height * 100}dvh` }
-          : { minHeight: '100dvh' }
+        {
+          minHeight: `${(height ?? 1) * 100}svh`,
+          '--scene-h': `${(height ?? 1) * 100}svh`,
+        } as React.CSSProperties
       }
     >
       {children}

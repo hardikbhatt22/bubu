@@ -30,12 +30,12 @@ export default function S04Ordinary() {
       : { pathLength: 1, opacity: [0, 0.85, 0.85], transition: { duration: 3.1, ease: ease.enter, delay } };
 
   return (
-    <Scene id="ordinary" label="An ordinary day" className="flex items-center px-6 py-[12vh]">
+    <Scene id="ordinary" label="An ordinary day" className="flex items-center px-6 py-[12svh]">
       <div className="mx-auto flex w-full max-w-4xl flex-col items-center gap-14">
         <Eyebrow>{s.place}</Eyebrow>
 
         {/* the crossing */}
-        <div ref={ref} className="relative h-[34vh] w-full max-w-2xl sm:h-[30vh]">
+        <div ref={ref} className="relative h-[34svh] w-full max-w-2xl sm:h-[30svh]">
           <svg
             viewBox="0 0 400 200"
             className="h-full w-full"

@@ -41,7 +41,12 @@ export default function S03Bubu() {
   const dodge = useCallback(() => {
     if (dodges >= 3) return;
     const dir = dodges % 2 === 0 ? 1 : -1;
-    setNudge({ x: dir * (34 + dodges * 12), y: dodges % 2 === 0 ? -14 : 16 });
+    /* How far it runs is capped by the screen it is running across. On a
+       360px phone the desktop amplitude carried the word clean off the
+       gutter, so the joke landed as a missing word. */
+    const room = typeof window === 'undefined' ? 360 : window.innerWidth;
+    const amp = Math.min(34 + dodges * 12, Math.max(14, room * 0.1));
+    setNudge({ x: dir * amp, y: dodges % 2 === 0 ? -14 : 16 });
     setDodges((d) => d + 1);
   }, [dodges]);
 
@@ -49,7 +54,7 @@ export default function S03Bubu() {
     dodges === 0 ? null : dodges === 1 ? bubuCopy.dodge1 : dodges === 2 ? bubuCopy.dodge2 : bubuCopy.dodgeGiveUp;
 
   return (
-    <Scene id="bubu" label="You" className="flex items-center px-6 py-[12vh]">
+    <Scene id="bubu" label="You" className="flex items-center px-6 py-[12svh]">
       <div className="mx-auto grid w-full max-w-6xl gap-14 lg:grid-cols-[1.35fr_0.65fr] lg:items-center lg:gap-20">
         <div className="flex flex-col gap-10">
           <Eyebrow>{s.place}</Eyebrow>
@@ -100,8 +105,14 @@ export default function S03Bubu() {
                 >
                   {isDodger ? (
                     <motion.span
-                      className="u-caps inline-block cursor-default rounded-edge border border-amber-400/25 px-3 py-2 text-cream-100/75"
+                      className="u-caps inline-flex min-h-[44px] cursor-default touch-manipulation select-none items-center rounded-edge border border-amber-400/25 px-3 text-cream-100/75"
                       onMouseEnter={dodge}
+                      /* A phone has no cursor to dodge, so the joke was simply
+                         missing there. A tap is the touch equivalent of
+                         reaching for it. */
+                      onPointerDown={(e) => {
+                        if (e.pointerType !== 'mouse') dodge();
+                      }}
                       onFocus={dodge}
                       tabIndex={0}
                       animate={reduced ? undefined : nudge}
@@ -133,7 +144,7 @@ export default function S03Bubu() {
         {/* the first photo — small, warm, slightly overexposed by the lamplight */}
         <div className="mx-auto w-[66%] max-w-[300px] lg:w-full lg:max-w-none">
           <PhotoFrame
-            photo={photoById(1)}
+            photo={photoById(5)}
             ratio="tall"
             priority
             light="top"

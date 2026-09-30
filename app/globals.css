@@ -30,6 +30,10 @@ html {
   background: var(--ink-900);
   color-scheme: dark;
   scroll-behavior: smooth;
+  /* iOS inflates body copy when a phone is turned to landscape. The type here
+     is already fluid, so let it stay the size it was designed to be. */
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
 }
 
 /* The door holds the page still until she has made the effort to open it. */
@@ -46,6 +50,15 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   overflow-x: hidden;
+}
+
+/* The walk is drawn edge to edge, so the viewport covers the notch and the
+   home indicator. The square itself then keeps its distance from them: every
+   scene lives inside `main`, so one rule here keeps type out from under a
+   rounded corner in landscape without touching fifteen files. */
+main {
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
 }
 
 ::selection {
@@ -96,9 +109,12 @@ body {
     text-wrap: balance;
   }
 
+  /* Wide tracking is the site's voice, but 0.22em on a 360px screen turns a
+     six-word label into three ragged lines. The tracking relaxes with the
+     viewport instead of wrapping. */
   .u-caps {
     text-transform: lowercase;
-    letter-spacing: 0.22em;
+    letter-spacing: clamp(0.11em, 0.055em + 0.42vw, 0.22em);
     font-size: 0.68rem;
     font-weight: 500;
   }
@@ -182,6 +198,17 @@ body {
   /* Press is an inward settle, never a bounce. */
   .u-control:active {
     transform: scale(0.985);
+  }
+
+  /* Small quiet controls — the roman toggle, "skip the door", "pick again".
+     They stay visually slight, but the thing a thumb has to hit is never
+     smaller than 44px. */
+  .u-quiet {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    min-width: 44px;
   }
 
   /* Photographs are pinned up, not put in rounded cards. */

@@ -48,7 +48,12 @@ export const viewport: Viewport = {
   themeColor: '#07080F',
   width: 'device-width',
   initialScale: 1,
+  /* Pinch-zoom stays available. A private letter is something she may well
+     want to zoom into, and disabling it would be an accessibility failure. */
   maximumScale: 5,
+  /* The night sky runs under the notch and the home indicator; `main` in
+     globals.css keeps the type clear of both. */
+  viewportFit: 'cover',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

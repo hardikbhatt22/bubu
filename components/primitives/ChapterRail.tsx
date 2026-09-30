@@ -23,7 +23,7 @@ export default function ChapterRail() {
       {/* -------------------------------------------------- mobile filament */}
       <div
         aria-hidden
-        className="pointer-events-none fixed left-0 top-0 z-40 h-full w-[3px] bg-cream-100/[0.04] md:hidden"
+        className="pointer-events-none fixed left-[env(safe-area-inset-left)] top-0 z-40 h-full w-[3px] bg-cream-100/[0.04] md:hidden"
       >
         <motion.div
           className="w-full origin-top"

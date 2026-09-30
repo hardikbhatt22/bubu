@@ -31,13 +31,13 @@ export default function S12Promises() {
   }, []);
 
   return (
-    <Scene id="promises" label="Five lamps" className="relative flex items-center px-6 py-[14vh]">
+    <Scene id="promises" label="Five lamps" className="relative flex items-center px-6 py-[14svh]">
       {/* first light — caused by her, not by the scrollbar */}
       <AnimatePresence>
         {all ? (
           <motion.div
             aria-hidden
-            className="pointer-events-none absolute inset-x-0 bottom-0 h-[55vh]"
+            className="pointer-events-none absolute inset-x-0 bottom-0 h-[55svh]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: reduced ? 0.4 : 3.4, ease: ease.enter }}
@@ -114,7 +114,10 @@ export default function S12Promises() {
                     </AnimatePresence>
                   </span>
 
-                  <span className="u-caps ml-auto shrink-0 self-center text-[0.55rem] text-cream-200/25">
+                  {/* Hidden below `sm`: the lamp beside the promise already
+                      says it is lit, and on a 320px row this label was eating
+                      the width the promise itself needed. */}
+                  <span className="u-caps ml-auto hidden shrink-0 self-center text-[0.55rem] text-cream-200/25 sm:block">
                     {on ? promisesCopy.litLabel : ''}
                   </span>
                 </button>

@@ -27,16 +27,18 @@ export default function S09Drive() {
   const [view, setView] = useState<'road' | 'seat'>('road');
 
   return (
-    <Scene id="drive" label="No destination" className="flex items-center px-6 py-[12vh]">
+    <Scene id="drive" label="No destination" className="flex items-center px-6 py-[12svh]">
       <div className="mx-auto flex w-full max-w-5xl flex-col gap-12">
         <Eyebrow>{s.place}</Eyebrow>
 
         {/* ------------------------------------------------------ the cabin */}
         <Reveal soft>
-          <div
-            className="relative w-full overflow-hidden rounded-edge border border-amber-400/15"
-            style={{ aspectRatio: '16 / 10', maxHeight: '62vh' }}
-          >
+          {/* A 16:10 letterbox is a cinema frame on a laptop and a mail slot on
+              a phone — at 390px wide it left the windscreen 210px tall, which
+              is shorter than the photograph riding in the passenger seat. The
+              cabin stands up on a small screen and lies down again on a large
+              one. */}
+          <div className="relative aspect-[6/5] max-h-[62svh] w-full overflow-hidden rounded-edge border border-amber-400/15 sm:aspect-[16/10]">
             <motion.div
               className="flex h-full w-[200%] cursor-grab active:cursor-grabbing"
               drag="x"
@@ -103,7 +105,9 @@ export default function S09Drive() {
                     borderTopRightRadius: '46% 90%',
                   }}
                 />
-                <span className="u-caps absolute bottom-4 left-5 text-cream-200/35">
+                {/* Top-left below `sm`: the control cluster owns the bottom
+                    edge there, and the two used to print over each other. */}
+                <span className="u-caps absolute left-4 top-4 text-cream-200/35 sm:bottom-4 sm:left-5 sm:top-auto">
                   {driveCopy.road}
                 </span>
               </div>
@@ -127,29 +131,33 @@ export default function S09Drive() {
                   }}
                   data-motion="sweep"
                 />
-                <div className="relative w-[46%] max-w-[230px]">
+                {/* Narrower on a phone so the photograph sits BETWEEN the
+                    two labels rather than under them — a 2:3 frame is one and
+                    a half times its own width, and at 46% it filled the cabin
+                    top to bottom. */}
+                <div className="relative w-[36%] max-w-[230px] sm:w-[46%]">
                   <PhotoFrame
                     photo={photoById(2)}
                     ratio="tall"
                     light="left"
                     showNote={false}
                     eager
-                    sizes="(max-width: 768px) 46vw, 22vw"
+                    sizes="(max-width: 768px) 36vw, 22vw"
                   />
                 </div>
-                <span className="u-caps absolute bottom-4 left-5 text-cream-200/35">
+                <span className="u-caps absolute left-4 top-4 text-cream-200/35 sm:bottom-4 sm:left-5 sm:top-auto">
                   {driveCopy.seat}
                 </span>
               </div>
             </motion.div>
 
-            {/* look-over control — a real affordance, keyboard included */}
-            <div className="absolute bottom-4 right-4 flex items-center gap-2">
+            {/* look-over control — a real affordance, keyboard included.
+                Below `sm` only the two lights sit inside the cabin; the wording
+                moves out under the frame, where it has room to be read instead
+                of being printed across the windscreen. */}
+            <div className="absolute bottom-3 right-3 flex items-center gap-1 sm:bottom-4 sm:right-4 sm:gap-2">
               <span className="u-caps hidden pr-1 text-cream-200/30 sm:inline">
                 {driveCopy.lookHint}
-              </span>
-              <span className="u-caps pr-1 text-cream-200/30 sm:hidden">
-                {driveCopy.lookHintTouch}
               </span>
               {(['road', 'seat'] as const).map((v) => (
                 <button
@@ -158,7 +166,7 @@ export default function S09Drive() {
                   onClick={() => setView(v)}
                   aria-label={v === 'road' ? driveCopy.road : driveCopy.seat}
                   aria-current={view === v}
-                  className="grid h-11 w-11 place-items-center rounded-full"
+                  className="grid size-11 shrink-0 place-items-center rounded-full"
                 >
                   <motion.span
                     className="block rounded-full"
@@ -174,6 +182,10 @@ export default function S09Drive() {
               ))}
             </div>
           </div>
+
+          <p className="u-caps mt-3 text-center text-cream-200/30 sm:hidden">
+            {driveCopy.lookHintTouch}
+          </p>
         </Reveal>
 
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center">

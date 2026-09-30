@@ -123,7 +123,7 @@ export default function AmbientSound() {
       onClick={toggleSound}
       aria-pressed={sound}
       aria-label={sound ? ui.audioOn : ui.audioOff}
-      className="fixed right-4 top-4 z-40 grid h-11 w-11 place-items-center rounded-full border border-amber-400/25 text-amber-300/70 transition-colors hover:border-amber-300/60 hover:text-amber-300 md:right-6 md:top-6"
+      className="fixed right-[max(1rem,env(safe-area-inset-right))] top-[max(1rem,env(safe-area-inset-top))] z-40 grid size-11 place-items-center rounded-full border border-amber-400/25 text-amber-300/70 transition-colors hover:border-amber-300/60 hover:text-amber-300 md:right-[max(1.5rem,env(safe-area-inset-right))] md:top-[max(1.5rem,env(safe-area-inset-top))]"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.8, ease: ease.enter, delay: 1.2 }}

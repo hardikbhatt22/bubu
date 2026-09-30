@@ -25,7 +25,7 @@ export default function S05Wrapper() {
   const [open, setOpen] = useState(false);
 
   return (
-    <Scene id="wrapper" label="The wrapper" className="flex items-center px-6 py-[12vh]">
+    <Scene id="wrapper" label="The wrapper" className="flex items-center px-6 py-[12svh]">
       <div className="mx-auto grid w-full max-w-5xl items-center gap-16 lg:grid-cols-2 lg:gap-20">
         <div className="flex flex-col gap-10">
           <Eyebrow>{s.place}</Eyebrow>

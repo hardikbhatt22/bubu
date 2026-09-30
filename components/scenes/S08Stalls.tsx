@@ -205,7 +205,7 @@ export default function S08Stalls() {
   }, []);
 
   return (
-    <Scene id="stalls" label="Things I know about you" className="flex items-center px-6 py-[12vh]">
+    <Scene id="stalls" label="Things I know about you" className="flex items-center px-6 py-[12svh]">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-12">
         <div className="flex flex-col gap-6">
           <Eyebrow>{s.place}</Eyebrow>
