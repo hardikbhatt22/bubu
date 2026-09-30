@@ -15,10 +15,15 @@ npm run dev
 
 Then open http://localhost:3000.
 
-## Add the photographs
+## The photographs
 
-Drop five images into `public/images/` named `photo-1.jpg` … `photo-5.jpg`.
-See `public/images/README.md` for what each one is and where it appears.
+Four are in `public/images/`, named `photo-1` … `photo-4`. Drop a replacement in
+under the same name and restart — `scripts/photos.mjs` runs automatically on
+`npm run dev` and `npm run build`, recording each picture's real dimensions and
+a tiny blurred copy so frames reserve exact space and never load as empty boxes.
+
+The pictures are phone-tall, so every frame crops them. Which part survives is
+set by `focal` in `data/love.ts`. See `public/images/README.md`.
 
 Until a file exists, that frame shows an intentional lamplight placeholder with
 the photo's caption — nothing breaks and nothing looks unfinished.

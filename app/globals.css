@@ -1,0 +1,284 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================================================
+   PROMISE PLAZA — base layer
+   Colour anchor: Dairy Milk purple, warmed by lamplight amber, on night ink.
+   ========================================================================= */
+
+:root {
+  --ink-900: #07080f;
+  --ink-800: #0d1020;
+  --ink-700: #161a33;
+  --cocoa-600: #3b1e63;
+  --cocoa-500: #5b2c8f;
+  --amber-400: #e9a63c;
+  --amber-300: #f6c97a;
+  --cream-100: #f5ede0;
+  --cream-200: #e3d7c4;
+  --rose-500: #b94f63;
+  --pista-400: #9cbfa3;
+  --slate-500: #5c6480;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  background: var(--ink-900);
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+
+/* The door holds the page still until she has made the effort to open it. */
+html.at-door,
+html.at-door body {
+  overflow: hidden;
+  height: 100%;
+}
+
+body {
+  background: var(--ink-900);
+  color: var(--cream-100);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(233, 166, 60, 0.28);
+  color: var(--cream-100);
+}
+
+/* Always present. Never removed. Amber, offset. */
+:focus-visible {
+  outline: 2px solid var(--amber-400);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+@media (min-width: 1024px) {
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(233, 166, 60, 0.3) transparent;
+  }
+  ::-webkit-scrollbar {
+    width: 7px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(233, 166, 60, 0.26);
+    border-radius: 99px;
+  }
+}
+
+/* =========================================================================
+   Type utilities — the site's voice
+   ========================================================================= */
+
+@layer components {
+  .u-display {
+    font-family: var(--font-display), Georgia, serif;
+    font-variation-settings: 'SOFT' 40, 'WONK' 1, 'opsz' 40;
+    letter-spacing: -0.028em;
+    text-wrap: balance;
+  }
+
+  .u-display-tight {
+    font-family: var(--font-display), Georgia, serif;
+    font-variation-settings: 'SOFT' 60, 'WONK' 1, 'opsz' 100;
+    letter-spacing: -0.04em;
+    text-wrap: balance;
+  }
+
+  .u-caps {
+    text-transform: lowercase;
+    letter-spacing: 0.22em;
+    font-size: 0.68rem;
+    font-weight: 500;
+  }
+
+  .u-hand {
+    font-family: var(--font-hand), cursive;
+  }
+
+  .u-deva {
+    font-family: var(--font-deva), Georgia, serif;
+    line-height: 2;
+    text-wrap: balance;
+  }
+
+  .u-body {
+    max-width: 62ch;
+    line-height: 1.75;
+  }
+
+  /* A hairline that carries lamplight instead of a border colour. */
+  .u-rule {
+    background-image: linear-gradient(
+      90deg,
+      transparent,
+      rgba(233, 166, 60, 0.45) 18%,
+      rgba(233, 166, 60, 0.45) 82%,
+      transparent
+    );
+    height: 1px;
+  }
+
+  /* Interactive things in a night square are LIGHTS, not filled rectangles. */
+  .u-control {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.85rem 1.4rem;
+    border: 1px solid rgba(233, 166, 60, 0.32);
+    border-radius: 2px;
+    background: transparent;
+    color: var(--cream-100);
+    font-size: 0.78rem;
+    letter-spacing: 0.18em;
+    text-transform: lowercase;
+    transition:
+      border-color 180ms cubic-bezier(0.16, 1, 0.3, 1),
+      color 180ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 180ms cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: pointer;
+    min-height: 44px;
+    isolation: isolate;
+  }
+
+  .u-control::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    z-index: -1;
+    border-radius: 2px;
+    background: radial-gradient(
+      120% 160% at 50% 120%,
+      rgba(233, 166, 60, 0.26),
+      transparent 70%
+    );
+    opacity: 0;
+    transition: opacity 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .u-control:hover,
+  .u-control:focus-visible {
+    border-color: rgba(246, 201, 122, 0.7);
+    color: #fff;
+  }
+
+  .u-control:hover::before,
+  .u-control:focus-visible::before {
+    opacity: 1;
+  }
+
+  /* Press is an inward settle, never a bounce. */
+  .u-control:active {
+    transform: scale(0.985);
+  }
+
+  /* Photographs are pinned up, not put in rounded cards. */
+  .u-frame {
+    border: 1px solid rgba(233, 166, 60, 0.26);
+    border-radius: 2px;
+    background: rgba(13, 16, 32, 0.6);
+    padding: clamp(0.5rem, 1.6vw, 1rem);
+  }
+
+  /* Warm grade + lifted blacks so the five photos read as one memory set,
+     and so lamplight falls on them instead of past them. */
+  .u-photo {
+    filter: saturate(0.94) contrast(0.96) brightness(1.02) sepia(0.12)
+      hue-rotate(-6deg);
+  }
+}
+
+/* =========================================================================
+   Grain — one tiling noise across the whole site.
+   ========================================================================= */
+
+.grain {
+  position: fixed;
+  inset: -50%;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+  will-change: transform;
+  animation: grainshift 800ms steps(2, end) infinite;
+}
+
+@keyframes grainshift {
+  0% { transform: translate3d(0, 0, 0); }
+  50% { transform: translate3d(-1.5%, 1%, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+@keyframes plaza-fall {
+  0% { transform: translate3d(0, -25vh, 0); }
+  100% { transform: translate3d(-5vw, 115vh, 0); }
+}
+
+@keyframes plaza-streak {
+  0% { transform: translate3d(0, -30%, 0) scaleY(0.6); opacity: 0; }
+  12% { opacity: 0.9; }
+  100% { transform: translate3d(0, 140%, 0) scaleY(1.4); opacity: 0; }
+}
+
+@keyframes plaza-sweep {
+  0% { transform: translate3d(-40%, 0, 0) skewX(-14deg); opacity: 0; }
+  18% { opacity: 0.5; }
+  100% { transform: translate3d(240%, 0, 0) skewX(-14deg); opacity: 0; }
+}
+
+@keyframes plaza-breathe {
+  0%, 100% { opacity: 0.78; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.035); }
+}
+
+@keyframes plaza-road {
+  0% { transform: translate3d(0, -40%, 0); }
+  100% { transform: translate3d(0, 60%, 0); }
+}
+
+/* =========================================================================
+   Reduced motion — a designed static variant, not a disabled site.
+   The arc survives: cross-fades replace travel, weather becomes texture.
+   ========================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .grain {
+    animation: none;
+  }
+  [data-motion='ambient'],
+  [data-motion='weather'],
+  [data-motion='streak'],
+  [data-motion='sweep'],
+  [data-motion='road'] {
+    animation: none !important;
+  }
+  [data-motion='weather'] {
+    opacity: 0.14 !important;
+  }
+}
+
+/* =========================================================================
+   The finale's third beat. Everything stills — this is what makes the last
+   line feel like it arrives into silence rather than into more motion.
+   ========================================================================= */
+
+html[data-still='true'] [data-motion],
+html[data-still='true'] .grain {
+  animation-play-state: paused;
+}
